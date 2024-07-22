@@ -7,12 +7,10 @@ public class environment {
 
     @BeforeStep
     public void beforeStep() {
-        System.out.println("Before");
     }
 
     @AfterStep
     public void afterStep() {
-        System.out.println("After");
     }
 
 }
