@@ -18,7 +18,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.22.0</version>
+            <version>4.23.0</version>
         </dependency>
 
         <dependency>
@@ -31,8 +31,16 @@
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>7.18.0</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

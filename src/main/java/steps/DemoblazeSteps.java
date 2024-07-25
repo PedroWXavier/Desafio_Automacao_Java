@@ -3,6 +3,7 @@ package steps;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.CartPage;
 import pages.HomePage;
 import pages.ProductPage;
 
@@ -42,13 +43,27 @@ public class DemoblazeSteps {
 
         ProductPage productPage = new ProductPage(driver);
         productPage.clickAddToCartButton();
+        driver.get("https://www.demoblaze.com/index.html");
     }
 
     @When("I complete the payment")
     public void i_complete_the_payment() {
+        CartPage cartPage = new CartPage(driver);
+        cartPage.clickCart();
+        cartPage.clickPlaceOrder();
+        cartPage.sendName("John Doe");
+        cartPage.sendCountry("United States");
+        cartPage.sendCity("New York");
+        cartPage.sendCard("1234567890");
+        cartPage.sendMonth("01");
+        cartPage.sendYear("2023");
+        cartPage.clickPurchase();
     }
 
     @Then("I should validate my purchase")
     public void i_should_validate_my_purchase() {
+        CartPage cartPage = new CartPage(driver);
+        cartPage.clickOk();
+        driver.close();
     }
 }
