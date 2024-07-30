@@ -1,34 +1,33 @@
 package steps;
 
+import config.Driver;
 import io.cucumber.java.en.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pages.CartPage;
 import pages.HomePage;
 import pages.ProductPage;
 
-public class DemoblazeSteps {
+import static org.junit.Assert.assertEquals;
 
-    private final WebDriver driver = new ChromeDriver();
+public class DemoblazeSteps {
 
     @Given("that I access demoblaze site")
     public void that_I_access_demoblaze_site() {
-        driver.get("https://www.demoblaze.com/index.html");
+        Driver.getDriver().get("https://www.demoblaze.com/index.html");
     }
 
     @Given("I create an account")
     public void i_create_an_account() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(Driver.getDriver());
         homePage.clickSign_up();
         homePage.fillSign_username("pewx@hotmail.com");
         homePage.fillSign_password("1234");
         homePage.clickSign_button();
-        driver.get("https://www.demoblaze.com/index.html");
+        Driver.getDriver().get("https://www.demoblaze.com/index.html");
     }
 
     @Given("I do my login")
     public void i_do_my_login() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(Driver.getDriver());
         homePage.clickLog_in();
         homePage.fillLog_in_username("pewx@hotmail.com");
         homePage.fillLog_in_password("1234");
@@ -37,18 +36,18 @@ public class DemoblazeSteps {
 
     @When("I add a monitor to my cart")
     public void i_add_a_monitor_to_my_cart() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(Driver.getDriver());
         homePage.clickCategory_monitors();
         homePage.clickMonitor();
 
-        ProductPage productPage = new ProductPage(driver);
+        ProductPage productPage = new ProductPage(Driver.getDriver());
         productPage.clickAddToCartButton();
-        driver.get("https://www.demoblaze.com/index.html");
+        Driver.getDriver().get("https://www.demoblaze.com/index.html");
     }
 
     @When("I complete the payment")
     public void i_complete_the_payment() {
-        CartPage cartPage = new CartPage(driver);
+        CartPage cartPage = new CartPage(Driver.getDriver());
         cartPage.clickCart();
         cartPage.clickPlaceOrder();
         cartPage.sendName("John Doe");
@@ -62,8 +61,8 @@ public class DemoblazeSteps {
 
     @Then("I should validate my purchase")
     public void i_should_validate_my_purchase() {
-        CartPage cartPage = new CartPage(driver);
+        CartPage cartPage = new CartPage(Driver.getDriver());
+        assertEquals("Thank you for your purchase!", cartPage.getPurchaseText());
         cartPage.clickOk();
-        driver.close();
     }
 }

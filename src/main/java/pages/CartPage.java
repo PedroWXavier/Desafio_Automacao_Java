@@ -44,6 +44,9 @@ public class CartPage {
     @FindBy(xpath = "//*[@id='cartur']")
     public WebElement linkCartur;
 
+    @FindBy(css = "body > div.sweet-alert.showSweetAlert.visible > h2")
+    public WebElement purchaseText;
+
     public CartPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -89,5 +92,11 @@ public class CartPage {
 
     public void clickOk(){
         buttonOk.click();
+    }
+
+    public String getPurchaseText(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until( e -> purchaseText.isDisplayed());
+        return purchaseText.getText();
     }
 }
